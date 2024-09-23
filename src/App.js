@@ -1,23 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 
 function App() {
+  const [open, setOpen] = useState(false);
+
+  const openDialog = () => setOpen(true);
+  const closeDialog = () => setOpen(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6">My Material UI App</Typography>
+        </Toolbar>
+      </AppBar>
+      <Container sx={{ pt: 2 }}>
+        <Typography variant="h4" gutterBottom>
+          Добро пожаловать в наше приложение!
+        </Typography>
+        <Button onClick={openDialog} variant="contained">
+          Открыть диалоговое окно
+        </Button>
+      </Container>
+      <Dialog open={open} onClose={closeDialog}>
+        <DialogTitle>Использовать Material UI?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Это простое React приложение с использованием Material UI. Вы можете
+            настроить его по своему усмотрению.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button>Отмена</Button>
+          <Button>Согласен</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
